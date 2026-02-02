@@ -13,6 +13,7 @@ cargo install --path crates/dev-swiss
 | Command | Description | Docs |
 |---------|-------------|------|
 | `dev-swiss password` | Generate secure random passwords | [password.md](docs/password.md) |
+| `dev-swiss qrcode` | Generate QR codes with optional logo/background | [qrcode.md](docs/qrcode.md) |
 
 ## Development
 
