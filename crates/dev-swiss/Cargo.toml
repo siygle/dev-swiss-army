@@ -1,0 +1,13 @@
+[package]
+name = "dev-swiss"
+version = "0.1.0"
+edition = "2021"
+description = "A Swiss Army knife CLI toolkit for developers"
+
+[[bin]]
+name = "dev-swiss"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+dev-swiss-core = { path = "../dev-swiss-core" }
