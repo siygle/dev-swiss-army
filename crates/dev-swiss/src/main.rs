@@ -17,6 +17,9 @@ enum Commands {
     Password(commands::password::PasswordArgs),
     /// Generate QR codes from URLs or text
     Qrcode(commands::qrcode::QrCodeArgs),
+    /// Convert files between formats
+    #[cfg(feature = "convert")]
+    Convert(commands::convert::ConvertArgs),
 }
 
 fn main() {
@@ -25,5 +28,7 @@ fn main() {
     match cli.command {
         Commands::Password(args) => commands::password::run(args),
         Commands::Qrcode(args) => commands::qrcode::run(args),
+        #[cfg(feature = "convert")]
+        Commands::Convert(args) => commands::convert::run(args),
     }
 }
