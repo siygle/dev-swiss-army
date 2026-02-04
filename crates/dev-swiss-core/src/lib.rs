@@ -4,6 +4,9 @@ pub mod qrcode;
 #[cfg(feature = "convert")]
 pub mod convert;
 
+#[cfg(feature = "convert")]
+pub use convert::{convert, ConvertConfig, ConvertError, ConvertResult, Format};
+
 pub use password::{generate_password, PasswordConfig, PasswordError};
 pub use qrcode::{
     generate_qr, parse_color, render_to_terminal, ErrorCorrectionLevel, ImageConfig, LogoConfig,
