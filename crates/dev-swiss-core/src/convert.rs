@@ -60,3 +60,21 @@ impl From<std::io::Error> for ConvertError {
         ConvertError::IoError(e)
     }
 }
+
+/// Configuration for file conversion
+#[derive(Debug, Clone)]
+pub struct ConvertConfig {
+    pub input_path: PathBuf,
+    pub output_path: PathBuf,
+    pub from_format: Format,
+    pub to_format: Format,
+    pub force: bool,
+    pub verbose: bool,
+}
+
+/// Result of a successful conversion
+#[derive(Debug)]
+pub struct ConvertResult {
+    pub pages_processed: usize,
+    pub warnings: Vec<String>,
+}
