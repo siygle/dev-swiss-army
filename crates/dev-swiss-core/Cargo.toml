@@ -20,3 +20,6 @@ default = ["image-output", "convert"]
 image-output = ["image"]
 ai-generation = ["reqwest", "image", "serde", "serde_json", "base64"]
 convert = ["pdf-extract", "docx-rs"]
+
+[dev-dependencies]
+tempfile = "3"

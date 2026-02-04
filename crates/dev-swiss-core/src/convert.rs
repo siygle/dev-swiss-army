@@ -157,3 +157,60 @@ fn convert_pdf_to_docx(config: &ConvertConfig) -> Result<ConvertResult, ConvertE
         warnings,
     })
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_format_display() {
+        assert_eq!(format!("{}", Format::Pdf), "PDF");
+        assert_eq!(format!("{}", Format::Docx), "DOCX");
+    }
+
+    #[test]
+    fn test_unsupported_conversion() {
+        let config = ConvertConfig {
+            input_path: PathBuf::from("test.docx"),
+            output_path: PathBuf::from("test.pdf"),
+            from_format: Format::Docx,
+            to_format: Format::Pdf,
+            force: false,
+            verbose: false,
+        };
+
+        let result = convert(&config);
+        assert!(matches!(
+            result,
+            Err(ConvertError::UnsupportedConversion { .. })
+        ));
+    }
+
+    #[test]
+    fn test_input_not_found() {
+        let config = ConvertConfig {
+            input_path: PathBuf::from("/nonexistent/path/file.pdf"),
+            output_path: PathBuf::from("output.docx"),
+            from_format: Format::Pdf,
+            to_format: Format::Docx,
+            force: false,
+            verbose: false,
+        };
+
+        let result = convert(&config);
+        assert!(matches!(result, Err(ConvertError::InputNotFound(_))));
+    }
+
+    #[test]
+    fn test_error_display() {
+        let err = ConvertError::InputNotFound(PathBuf::from("test.pdf"));
+        assert!(err.to_string().contains("test.pdf"));
+
+        let err = ConvertError::UnsupportedConversion {
+            from: Format::Docx,
+            to: Format::Pdf,
+        };
+        assert!(err.to_string().contains("DOCX"));
+        assert!(err.to_string().contains("PDF"));
+    }
+}
