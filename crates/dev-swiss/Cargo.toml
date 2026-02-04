@@ -10,8 +10,9 @@ path = "src/main.rs"
 
 [dependencies]
 clap = { version = "4", features = ["derive", "env"] }
-dev-swiss-core = { path = "../dev-swiss-core", features = ["image-output"] }
+dev-swiss-core = { path = "../dev-swiss-core", features = ["image-output", "convert"] }
 
 [features]
-default = []
+default = ["convert"]
 ai-generation = ["dev-swiss-core/ai-generation"]
+convert = ["dev-swiss-core/convert"]
